@@ -9,10 +9,10 @@
 * 用户标识信息，服务端用 同腾讯服务器兑换的 openId，session_key 生成一个 `accessToken`（可讨论实现）
 
 
-## 登陆获取`accessToken`
+## 登陆获取`accessToken`[POST]
 
 ```javascript
-url:
+url:user/login
 
 request: {
     loginCode: String // wx.login兑换的code
@@ -22,17 +22,17 @@ response: {
     code: String, //请求返回码
     msg: String, //错误信息
     data: {
-        accessToken: String, //用户唯一标识
+        token: String, //用户唯一标识
         presetCardUrl: String //第一次进入的随机明信片url，为空，则认为不是第一次进入，
     }
 }
 ```
 
 
-## 获取小花状态以及明信片列表
+## 获取小花状态以及明信片列表[GET]
 
 ```javascript
-url:
+url:flower
 
 request: {
     
@@ -43,26 +43,22 @@ response: {
     msg: String, //错误信息
     data: {
         flowerList: [
-            {
-                uniqueCode: String, //小花唯一标识
-                lastCollectTime: Timestamp, //上次采摘时间
-            }
+            true, //小花是否被采摘
         ],
         collectedNum: Interger, //当前收集到的小花数
+        taskNum: Interger, //每张明信片所需收集的小花数
     }
 }
 ```
 
 
-## 收集小花
+## 收集小花[POST]
 
 ```javascript
-url:
+url:flower/{flowerId} //小花的id为0~9
 
 request: {
-    uniqueCode: String, //小花唯一标识
-    latitude: String, //wgs84 纬度
-    longitude: String // wgs84 精度
+
 }
 
 response: {
