@@ -24,6 +24,7 @@ response: {
     data: {
         token: String, //用户唯一标识
         presetCardUrl: String //第一次进入的随机明信片url，为空，则认为不是第一次进入，
+        presetCardId: Integer //第一次进入的随机明信片id，用来标识明信片，为空，则认为不是第一次进入，
     }
 }
 ```
@@ -66,15 +67,16 @@ response: {
     msg: String, //错误信息
     data: {
         rewardCardUrl: String, //5 张集满，返回的明信片url
+        rewardCardId: Integer, //5 张集满，返回的明信片id
     }
 }
 ```
 
 
-## 获取附近的明信片
+## 获取附近的明信片[GET]
 
 ```javascript
-url:
+url:postcard/search
 
 request: {
     latitude: String, //wgs84 纬度
@@ -85,24 +87,28 @@ response: {
     code: String, //请求返回码
     msg: String, //错误信息
     data: {
-        cardList: [
-            // String, 明信片 url
-        ]
+        postcards: [
+            id: Integer, // 明信片id
+            url: String, // 明信片url
+            distance: Integer, // 距离，单位m
+            direction: Integer, // 方向:0,西北;1,西南;2,东北;3,东南
+            canCollect: Boolean, // 是否可收集
+        ]
     }
 }
 ```
 
 
-## 明信片寄送
+## 明信片寄送[POST]
 
 ```javascript
-url:
+url:postcard/send
 
 request: {
-    departmentCode: String, //学院唯一标识码
+    departmentId: Integer, //学院唯一标识码
     targetName: String, //发送对象 名称
     content: String, //明信片发送内容
-    cardUrl: String, //明信片url
+    cardId: Integer, //明信片id
     authorName: String, //作者姓名
 }
 
@@ -112,13 +118,13 @@ response: {
 }
 ```
 
-## 获取感恩墙明信片列表
+## 获取感恩墙明信片列表[GET]
 
 ```javascript
-url:
+url:postcard/wall
 
 request: {
-    departmentCode: String, //学院唯一标识码
+    departmentId: Integer, //学院唯一标识码
 }
 
 response: {
@@ -127,7 +133,7 @@ response: {
     data: {
         mailList: [
             {
-                uniqueCode: String, // 明信片唯一标识
+                cardId: Integer, // 明信片唯一标识
                 targetName: String, //发送对象 名称
                 content: String, //明信片发送内容
                 cardUrl: String, //明信片url
