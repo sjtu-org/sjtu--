@@ -91,7 +91,8 @@ response: {
             locationId: Integer, // 位置id
             distance: Integer, // 距离，单位m
             direction: Integer, // 方向:0,西北;1,西南;2,东北;3,东南
-            state: Integer, // 收集状态:0,未收集;1,可收集;2,已收集
+            state: Integer, // 收集状态:0,可收集;1,未收集;2,已收集
+            name: String //地点名称:如果不在范围内，返回为未知
         ]
     }
 }
