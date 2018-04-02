@@ -68,6 +68,8 @@ response: {
     data: {
         rewardCardUrl: String, //5 张集满，返回的明信片url
         rewardCardId: Integer, //5 张集满，返回的明信片id
+        collectedNum: Interger, //当前收集到的小花数
+        taskNum: Interger, //每张明信片所需收集的小花数
     }
 }
 ```
