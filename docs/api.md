@@ -2,11 +2,11 @@
 
 接口全局约定如下：
 
-* 请求方法统一为`post`，跨域使用jsonp
-* 请求参数风格不使用query（用户标识信息可放入Url string）/resultful，请求参数和响应参数content-type统一为 `application/json`
+* 请求方法为`post`,`get`，跨域使用jsonp
+* 请求参数风格使用restful（用户标识信息放入header），请求参数和响应参数content-type统一为 `application/json`
 * 响应json至少包含3个字段：`code`（请求返回码，约定 '001'请求成功，其他出错），`msg`（非'001'需要带上的错误信息），`data`（返回数据统一作为data的value）
 * 字段名称统一使用驼峰命名
-* 用户标识信息，服务端用 同腾讯服务器兑换的 openId，session_key 生成一个 `accessToken`（可讨论实现）
+* 用户标识信息，服务端用 同腾讯服务器兑换的 openId，session_key 生成一个 `token`
 
 
 ## 登陆获取`accessToken`[POST]
@@ -145,13 +145,16 @@ url:postcard/wall
 
 request: {
     departmentId: Integer, //学院唯一标识码
+    pageSize: Integer, //分页大小
+    pageNum: Integer, //页面编号
+    searchKey: String, //搜索明信片内容
 }
 
 response: {
     code: String, //请求返回码
     msg: String, //错误信息
     data: {
-        mailList: [
+        postcards: [
             {
                 cardId: Integer, // 明信片唯一标识
                 targetName: String, //发送对象 名称
@@ -165,19 +168,21 @@ response: {
 ```
 
 
-## 获取明信片墙列表
+## 获取明信片墙列表[GET]
 
 ```javascript
 url:
 
 request: {
-    
+    pageSize: Integer, //分页大小
+    pageNum: Integer, //页面编号
 }
 
 response: {
     code: String, //请求返回码
     msg: String, //错误信息
     data: {
+        
         cardList: [
             // String, 明信片 url
         ]
@@ -185,4 +190,29 @@ response: {
 }
 ```
 
-
+//departmentId对应表
+1	船舶海洋与建筑工程学院
+2	机械与动力工程学院
+3	电子信息与电气工程学院
+4	软件学院
+5	微电子学院
+6	材料科学与工程学院
+7	理学院数学系
+8	理学院物理系
+9	化学化工学院
+10	环境科学与工程学院
+11	生命科学技术学院
+12	农业与生物学院
+13	医学院
+14	药学院
+15	人文学院
+16	外国语学院
+17	凯原法学院
+18	交大密西根学院
+19	媒体与设计学院
+20	航空航天学院
+21	系统生物医学研究院
+22	微纳科学技术研究院
+23	海洋水下工程科学研究院
+24	先进产业技术研究院
+25	高等教育研究院
