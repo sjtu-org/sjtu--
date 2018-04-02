@@ -178,7 +178,7 @@ response: {
 ## 获取明信片墙列表[GET]
 
 ```javascript
-url:
+url:postcard
 
 request: {
     pageSize: Integer, //分页大小
