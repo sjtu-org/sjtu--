@@ -147,22 +147,28 @@ request: {
     departmentId: Integer, //学院唯一标识码
     pageSize: Integer, //分页大小
     pageNum: Integer, //页面编号
-    searchKey: String, //搜索明信片内容
+    searchKey: String, //搜索明信片内容和收件人
 }
 
 response: {
     code: String, //请求返回码
     msg: String, //错误信息
     data: {
-        postcards: [
-            {
-                cardId: Integer, // 明信片唯一标识
-                targetName: String, //发送对象 名称
-                content: String, //明信片发送内容
-                cardUrl: String, //明信片url
-            }
-            ...
-        ]
+    "pageAmount": 0, //页面总数
+    "pageNum": 0, //页号
+    "pageSize": 0, //分页大小
+    "result": [
+      {
+        "authorName": "string", //发件人名字
+        "cardId": 0, //卡片id
+        "cardUrl": "string", //url链接
+        "content": "string", //内容
+        "departmentId": 0, //部门
+        "targetName": "string", //收件人名字
+        "used": true //是否使用过
+      }
+    ],
+    "resultAmount": 0 //数据总数
     }
 }
 ```
@@ -182,10 +188,21 @@ response: {
     code: String, //请求返回码
     msg: String, //错误信息
     data: {
-        
-        cardList: [
-            // String, 明信片 url
-        ]
+    "pageAmount": 0, //页面总数
+    "pageNum": 0, //页号
+    "pageSize": 0, //分页大小
+    "result": [
+      {
+        "authorName": "string", //发件人名字
+        "cardId": 0, //卡片id
+        "cardUrl": "string", //url链接
+        "content": "string", //内容
+        "departmentId": 0, //部门
+        "targetName": "string", //收件人名字
+        "used": true //是否使用过
+      }
+    ],
+    "resultAmount": 0 //数据总数
     }
 }
 ```
