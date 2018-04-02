@@ -43,7 +43,7 @@ response: {
     code: String, //请求返回码
     msg: String, //错误信息
     data: {
-        flowerList: [
+        flowerStates: [
             true, //小花是否被采摘
         ],
         collectedNum: Interger, //当前收集到的小花数
@@ -76,11 +76,11 @@ response: {
 ## 获取附近的明信片[GET]
 
 ```javascript
-url:postcard/search
+url:postcard/location
 
 request: {
-    latitude: String, //wgs84 纬度
-    longitude: String // wgs84 精度
+    latitude: Double, //wgs84 纬度
+    longitude: Double // wgs84 经度
 }
 
 response: {
@@ -88,15 +88,35 @@ response: {
     msg: String, //错误信息
     data: {
         postcards: [
-            id: Integer, // 明信片id
-            url: String, // 明信片url
+            locationId: Integer, // 位置id
             distance: Integer, // 距离，单位m
             direction: Integer, // 方向:0,西北;1,西南;2,东北;3,东南
-            canCollect: Boolean, // 是否可收集
+            state: Integer, // 收集状态:0,未收集;1,可收集;2,已收集
         ]
     }
 }
 ```
+
+## 收集附近的明信片[POST]
+
+```javascript
+url:postcard/location/{locationId}
+
+request: {
+    latitude: Double, //wgs84 纬度
+    longitude: Double // wgs84 经度
+}
+
+response: {
+    code: String, //请求返回码
+    msg: String, //错误信息
+    data: {
+        rewardCardUrl: String, //返回的明信片url
+        rewardCardId: Integer, //返回的明信片id
+    }
+}
+```
+
 
 
 ## 明信片寄送[POST]
