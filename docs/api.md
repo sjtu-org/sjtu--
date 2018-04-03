@@ -168,10 +168,11 @@ response: {
         "content": "string", //内容
         "departmentId": 0, //部门
         "targetName": "string", //收件人名字
-        "used": true //是否使用过
+        "used": true //是否使用过，false为未使用过，可以点击，true为已使用过，不可点击
       }
     ],
-    "resultAmount": 0 //数据总数
+    "resultAmount": 0, //数据总数
+    "totalAmount": 0, //所有种类的明信片总数
     }
 }
 ```
